@@ -1,8 +1,8 @@
 # Deploying a React App on AWS EC2
 
-This guide provides a step-by-step approach to deploying a React application on an AWS EC2 instance. <br/>
+This post provides a step-by-step approach to deploying a React application on an AWS EC2 instance. <br/>
 
-![](/images/crm-tb1.png) 
+![](/images/crm-tb2.png) 
 
 
 ## Prerequisites
