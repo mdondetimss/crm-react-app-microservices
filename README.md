@@ -1,70 +1,148 @@
-# Getting Started with Create React App
+# Deploying a React App on AWS EC2
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This guide provides a step-by-step approach to deploying a React application on an AWS EC2 instance. 
 
-## Available Scripts
+## Prerequisites
 
-In the project directory, you can run:
+Before starting, ensure you have:
+- An AWS account
+- Basic knowledge of React and AWS
+- Node.js and npm installed on your local machine
 
-### `npm start`
+## Steps
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 1. Launch an EC2 Instance
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. **Log in to AWS Management Console**
+   - Access the AWS Management Console from your web browser.
 
-### `npm test`
+2. **Navigate to the EC2 Dashboard**
+   - Select "EC2" from the AWS services menu.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. **Launch a New Instance**
+   - Click on "Launch Instance."
+   - Choose an Amazon Machine Image (AMI). For this guide, select the Amazon Linux 2 AMI.
+   - Select an instance type. The `t2.micro` instance type is sufficient for small applications.
+   - Configure instance details and adjust storage settings as needed.
+   - Add tags (optional) and configure the security group to allow HTTP (port 80) and SSH (port 22) traffic.
+   - Review your settings and launch the instance. Create a new key pair or use an existing one for SSH access.
 
-### `npm run build`
+### 2. Connect to Your EC2 Instance
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **Select Your Instance**
+   - Go to the EC2 Dashboard, find your newly launched instance, and select it.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. **Connect Using SSH**
+   - Click on "Connect" to get the SSH connection instructions.
+   - Use an SSH client to connect to the instance with the provided command.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 3. Install Required Software
 
-### `npm run eject`
+1. **Update Package Index**
+   - Run the following command to update the package index:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+     ```bash
+     sudo yum update -y
+     ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. **Install Node.js and npm**
+   - Install Node.js and npm using the following command:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+     ```bash
+     sudo amazon-linux-extras install nodejs10
+     ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+   - Verify the installation:
 
-## Learn More
+     ```bash
+     node -v
+     npm -v
+     ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 4. Set Up Your React Application
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. **Transfer Project Files**
+   - Clone your React application repository or transfer your project files to the EC2 instance.
 
-### Code Splitting
+2. **Navigate to Your Project Directory**
+   - Use `cd` to navigate to the directory where your React app is located:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+     ```bash
+     cd /path/to/your/react-app
+     ```
 
-### Analyzing the Bundle Size
+3. **Install Project Dependencies**
+   - Run `npm install` to install the required dependencies:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+     ```bash
+     npm install
+     ```
 
-### Making a Progressive Web App
+4. **Build the React Application**
+   - Generate the production build of your application:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+     ```bash
+     npm run build
+     ```
 
-### Advanced Configuration
+### 5. Install and Configure a Web Server
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+1. **Install Nginx**
+   - Install Nginx using the following command:
 
-### Deployment
+     ```bash
+     sudo amazon-linux-extras install nginx1.12
+     ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+2. **Start and Enable Nginx**
+   - Start the Nginx service and enable it to start on boot:
 
-### `npm run build` fails to minify
+     ```bash
+     sudo service nginx start
+     sudo systemctl enable nginx
+     ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+3. **Configure Nginx to Serve Your React App**
+   - Edit the Nginx configuration file:
+
+     ```bash
+     sudo nano /etc/nginx/nginx.conf
+     ```
+
+   - Add the following server block to the configuration:
+
+     ```nginx
+     server {
+         listen 80;
+         server_name your_domain_or_IP;
+
+         location / {
+             root /path/to/your/react-app/build;
+             try_files $uri /index.html;
+         }
+     }
+     ```
+
+   - Save and exit the editor. Restart Nginx to apply the new configuration:
+
+     ```bash
+     sudo service nginx restart
+     ```
+
+### 6. Test Your Application
+
+1. **Access Your Application**
+   - Open a web browser and navigate to your EC2 instance's public IP or domain name.
+   - Verify that your React application is being served correctly.
+
+## Conclusion
+
+You have successfully deployed your React application on an AWS EC2 instance. Your app should now be accessible via the public IP or domain name associated with your EC2 instance.
+
+## Additional Resources
+
+- [AWS EC2 Documentation](https://docs.aws.amazon.com/ec2/index.html)
+- [React Documentation](https://reactjs.org/docs/getting-started.html)
+- [Nginx Documentation](https://nginx.org/en/docs/)
+
+Feel free to adapt and expand this guide as needed for your deployment requirements.
