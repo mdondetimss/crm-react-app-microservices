@@ -2,8 +2,8 @@
 
 This post provides a step-by-step approach to deploying a React application on an AWS EC2 instance. <br/>
 
-![](/images/crm-tb2.png) 
 
+<img src="/images/crm-tb2.png" alt="Description" width="600" height="600">
 
 ## Prerequisites
 
