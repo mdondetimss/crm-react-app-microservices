@@ -135,6 +135,11 @@ Before starting, ensure you have:
 1. **Access Your Application**
    - Open a web browser and navigate to your EC2 instance's public IP or domain name.
    - Verify that your React application is being served correctly.
+  
+   # CRM Dashboard
+    ![](/images/crm-db.png)
+   # CRM Rergister
+   - ![](/images/crm-register.png) 
 
 ## Conclusion
 
