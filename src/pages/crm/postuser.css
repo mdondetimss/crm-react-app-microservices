@@ -1,0 +1,43 @@
+/* postuser.css */
+
+/* Center the form within its container */
+.center-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full viewport height */
+    padding: 2rem;
+}
+
+/* Style the form heading */
+.center-form h1 {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    color: #333; /* Darker color for better readability */
+}
+
+/* Style each form control */
+.center-form .form-control {
+    margin-bottom: 1rem;
+    border-radius: 0.25rem; /* Rounded corners */
+    box-shadow: 0 0 0.125rem rgba(0,0,0,0.075); /* Subtle shadow */
+}
+
+/* Style the submit button */
+.center-form .btn-primary {
+    background-color: #007bff; /* Bootstrap primary color */
+    border: none; /* Remove border */
+    border-radius: 0.25rem; /* Rounded corners */
+    padding: 0.75rem 1.5rem; /* Padding for button */
+    font-size: 1rem; /* Font size */
+}
+
+.center-form .btn-primary:hover {
+    background-color: #0056b3; /* Darker shade for hover effect */
+}
+
+/* Ensure the button takes full width */
+.center-form .w-100 {
+    width: 100%;
+}

@@ -1,0 +1,36 @@
+/* header.css */
+
+/* Ensure that the navbar uses the primary color from Bootstrap */
+.navbar {
+    background-color: #007bff; /* Bootstrap primary blue color */
+  }
+  
+  /* Style for Navbar.Brand */
+  .navbar-brand {
+    font-weight: bold;
+    color: white; /* Ensure the text is visible on the blue background */
+  }
+  
+  .navbar-brand:hover {
+    color: #e3f2fd; /* Light blue for hover effect */
+  }
+  
+  /* Style for Nav links */
+  .nav-link {
+    color: white; /* Set link color to white for better visibility */
+  }
+  
+  .nav-link:hover {
+    color: #e3f2fd; /* Light blue for hover effect */
+  }
+  
+  /* Optional: Style for Navbar container */
+  .container {
+    max-width: 1140px; /* Adjust container width as needed */
+  }
+  
+  /* Optional: Adjust navbar padding */
+  .navbar {
+    padding: 0.5rem 1rem; /* Adjust padding as needed */
+  }
+  
