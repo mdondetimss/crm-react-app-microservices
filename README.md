@@ -4,7 +4,7 @@ This guide provides a step-by-step approach to deploying a React application on 
 
 ![](/images/crm-tb.png) 
 
-<br/>
+
 ## Prerequisites
 
 Before starting, ensure you have:
