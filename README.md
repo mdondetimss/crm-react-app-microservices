@@ -1,6 +1,6 @@
-# Build and Deploying a React App with microservices as backend on AWS EC2
+# Build and Deploying a React App with AWS EC2
 
-This post provides a step-by-step approach to deploying a React application on an AWS EC2 instance. <br/>
+This post provides a step-by-step approach to deploying a React application with mulesoft as back end microservices  on an AWS EC2 instance. <br/>
 
 
 <img src="/images/crm-tb2.png" alt="Description" width="600" height="600">
